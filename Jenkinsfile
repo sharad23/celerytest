@@ -3,7 +3,7 @@ def APP_CONTAINER_NAME ="apple-api-cont"
 def MQ_CONTAINER_NAME="mq-container-name"
 def CELERY
 def CONTAINER_TAG="latest"
-def HTTP_PORT="8080"
+def HTTP_PORT="8060"
 
 pipeline {
     agent none
@@ -27,6 +27,11 @@ node {
     stage('Build') {
         imagePrune(APP_CONTAINER_NAME)
         sh "docker build -t $APP_IMAGE_NAME ."
+
+    }
+    stage('Deploy'){
+        sh "docker run -d  -p 15672:15672  -p 5672:5672 --name rabbit1 rabbitmq:3"
+        sh "docker run -p $HTTP_PORT:8080 -d --link rabbit1:rabbit --name=$APP_CONTAINER_NAME  $APP_IMAGE_NAME "
 
     }
 
