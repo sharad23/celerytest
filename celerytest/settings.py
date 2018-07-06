@@ -168,6 +168,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apple.apps.AppleConfig',
+    'rest_framework',
 
 ]
 
@@ -241,6 +242,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+STATIC_URL = '/static/'
 
 RABBIT_HOST = 'rabbit'
 
