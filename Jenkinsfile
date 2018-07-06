@@ -25,8 +25,7 @@ pipeline {
 
 node {
     stage('Build') {
-        imagePrune(CONTAINER_NAME)
-        sh "docker build -t $IMAGE_NAME ."
+        sh "docker build -t $APP_IMAGE_NAME ."
 
     }
 
